@@ -52,8 +52,13 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="models\AnomalyDetector.cs" />
+    <Compile Include="models\CheckConstraint.cs" />
+    <Compile Include="models\ForeignKey.cs" />
     <Compile Include="models\MyDB.cs" />
     <Compile Include="models\MyFileManager.cs" />
+    <Compile Include="models\PrimaryKey.cs" />
+    <Compile Include="models\TableDB.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Form1.resx">
