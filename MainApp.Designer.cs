@@ -1,7 +1,7 @@
 ﻿
 namespace auditoria_grupo2_anomalias_integridad_referencial
 {
-    partial class Form1
+    partial class MainApp
     {
         /// <summary>
         /// Variable del diseñador necesaria.
@@ -31,6 +31,7 @@ namespace auditoria_grupo2_anomalias_integridad_referencial
         {
             this.button_test_connection = new System.Windows.Forms.Button();
             this.button_get_integrity_metadata = new System.Windows.Forms.Button();
+            this.button_detect_anomalies = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // button_test_connection
@@ -53,11 +54,22 @@ namespace auditoria_grupo2_anomalias_integridad_referencial
             this.button_get_integrity_metadata.UseVisualStyleBackColor = true;
             this.button_get_integrity_metadata.Click += new System.EventHandler(this.button_get_integrity_metadata_Click);
             // 
+            // button_detect_anomalies
+            // 
+            this.button_detect_anomalies.Location = new System.Drawing.Point(72, 124);
+            this.button_detect_anomalies.Name = "button_detect_anomalies";
+            this.button_detect_anomalies.Size = new System.Drawing.Size(113, 34);
+            this.button_detect_anomalies.TabIndex = 2;
+            this.button_detect_anomalies.Text = "Detectar anomalías";
+            this.button_detect_anomalies.UseVisualStyleBackColor = true;
+            this.button_detect_anomalies.Click += new System.EventHandler(this.buttonDetectAnomalies_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(254, 110);
+            this.ClientSize = new System.Drawing.Size(253, 185);
+            this.Controls.Add(this.button_detect_anomalies);
             this.Controls.Add(this.button_get_integrity_metadata);
             this.Controls.Add(this.button_test_connection);
             this.Name = "Form1";
@@ -70,6 +82,7 @@ namespace auditoria_grupo2_anomalias_integridad_referencial
 
         private System.Windows.Forms.Button button_test_connection;
         private System.Windows.Forms.Button button_get_integrity_metadata;
+        private System.Windows.Forms.Button button_detect_anomalies;
     }
 }
 

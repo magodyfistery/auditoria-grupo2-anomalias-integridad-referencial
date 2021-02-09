@@ -9,12 +9,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static auditoria_grupo2_anomalias_integridad_referencial.models.AnomalyDetector;
 
 namespace auditoria_grupo2_anomalias_integridad_referencial
 {
-    public partial class Form1 : Form
+    public partial class MainApp : Form
     {
-        public Form1()
+        public MainApp()
         {
             InitializeComponent();
         }
@@ -26,7 +27,7 @@ namespace auditoria_grupo2_anomalias_integridad_referencial
             try
             {
                 cnn.Open();
-                MessageBox.Show("Conexión funciona");
+                MessageBox.Show("Conexión con pubs funciona");
             }
             catch (Exception error)
             {
@@ -81,11 +82,49 @@ namespace auditoria_grupo2_anomalias_integridad_referencial
             for(int i=0; i<sqls.Length; i++)
             {
                 string filename = sqls[i][0], header = sqls[i][1], sql = sqls[i][2];
-                MyDB.selectAllAndWrite(sql, "D://audit_component_recognition/" + filename + ".txt", header);
+                MyDB.selectAllAndWrite(sql, "D://" + filename + ".txt", header);
             }
 
+            MessageBox.Show("TXT generados con los metadatos en D://");
 
 
+
+
+        }
+
+        private void buttonDetectAnomalies_Click(object sender, EventArgs e)
+        {
+            List<Anomaly> anomalies_dbcc = AnomalyDetector.detectAnomaliesWithData();
+            List<Anomaly> anomalies_structure = AnomalyDetector.detectAnomaliesWithNoData();
+
+
+            string output_log = "";
+            output_log += "**********ANOMALY in DATA***********\n";
+
+            foreach (var item in anomalies_dbcc)
+            {
+                // string extra_summary = Trigger.getExtraSummary(item.object_id);
+
+                output_log += "\n***Anomalía del objeto " + item.object_id + ": \n" + item.summary; // + "\n" + extra_summary + "\n";
+            }
+
+            output_log += "\n\n**********ANOMALY STRUCTURE*************\n";
+            foreach (var item in anomalies_structure)
+            {
+
+                output_log += "\n***Anomalía structure in " + item.object_id + ": \n" + item.summary;
+            }
+
+            MyFileManager.writeTXT(output_log, "D://AUDITORIA_LOG_.txt");
+
+            if(anomalies_dbcc.Count + anomalies_structure.Count > 0)
+            {
+                MessageBox.Show("LOG GENERADO CON ANOMALÍAS en D://AUDITORIA_LOG_.txt");
+            }
+            else
+            {
+                MessageBox.Show("NO SE DETECTARON ANOMALÍAS");
+            }
 
         }
     }

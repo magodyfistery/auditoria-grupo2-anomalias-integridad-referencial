@@ -58,8 +58,10 @@ namespace auditoria_grupo2_anomalias_integridad_referencial.models
                 if(!table_has_foreign_key_of_other && !table_is_a_foreign_key_in_other)
                 {
                     // table is alone and not conected
+                    string extra_summary = Trigger.getExtraSummary(tables[index_table].object_id);
+
                     anomalies.Add(new Anomaly(tables[index_table].object_id, Anomaly.TYPE_NO_DATA,
-                        tables[index_table].name + "|" + tables[index_table].object_id + ": tabla aislada, posible anomalía."));
+                        tables[index_table].name + "|" + tables[index_table].object_id + ": tabla aislada, posible anomalía."+ extra_summary));
                 }
             }
 
@@ -106,15 +108,17 @@ namespace auditoria_grupo2_anomalias_integridad_referencial.models
                 }
                 if (table_has_foreign_key_of_other)
                 {
+                    string extra_summary = Trigger.getExtraSummary(tablesWithOutPrimaryKey[index_table_no_pk].object_id);
                     // table has FK but this FK are not primary key
                     anomalies.Add(new Anomaly(tablesWithOutPrimaryKey[index_table_no_pk].object_id, Anomaly.TYPE_NO_DATA,
-                        tablesWithOutPrimaryKey[index_table_no_pk].name + "|" + tablesWithOutPrimaryKey[index_table_no_pk].object_id + ": tabla con FK pero sin PK. ¿Esto es a propósito o un error?"));
+                        tablesWithOutPrimaryKey[index_table_no_pk].name + "|" + tablesWithOutPrimaryKey[index_table_no_pk].object_id + ": tabla con FK pero sin PK. ¿Esto es a propósito o un error?\n" + extra_summary));
                 }
                 if (table_is_a_foreign_key_in_other)
                 {
+                    string extra_summary = Trigger.getExtraSummary(tablesWithOutPrimaryKey[index_table_no_pk].object_id);
                     // table has FK but this FK are not primary key
                     anomalies.Add(new Anomaly(tablesWithOutPrimaryKey[index_table_no_pk].object_id, Anomaly.TYPE_NO_DATA,
-                        tablesWithOutPrimaryKey[index_table_no_pk].name + "|" + tablesWithOutPrimaryKey[index_table_no_pk].object_id + ": Gran error, la tabla no tiene PK y es FK en otra tabla"));
+                        tablesWithOutPrimaryKey[index_table_no_pk].name + "|" + tablesWithOutPrimaryKey[index_table_no_pk].object_id + ": Gran error, la tabla no tiene PK y es FK en otra tabla\n" + extra_summary));
                 }
             }
 
@@ -147,7 +151,7 @@ namespace auditoria_grupo2_anomalias_integridad_referencial.models
                     string sql = "DBCC CHECKCONSTRAINTS('" + foreignKeys[i].name + "')";
                     sqlCommand = new SqlCommand(sql, connection);
                     dataReader = sqlCommand.ExecuteReader();
-                    string output = "FK: ";
+                    string output = "ForeignKey: ";
 
                     bool exist_data = false;
 
@@ -203,7 +207,7 @@ namespace auditoria_grupo2_anomalias_integridad_referencial.models
                     string sql = "DBCC CHECKCONSTRAINTS('" + primaryKeys[i].name + "')";
                     sqlCommand = new SqlCommand(sql, connection);
                     dataReader = sqlCommand.ExecuteReader();
-                    string output = "PK: ";
+                    string output = "PrimaryKey: ";
 
                     bool exist_data = false;
 
