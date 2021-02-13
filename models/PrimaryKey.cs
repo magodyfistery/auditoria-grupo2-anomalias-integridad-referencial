@@ -37,7 +37,7 @@ namespace auditoria_grupo2_anomalias_integridad_referencial.models
             {
                 connection.Open();
 
-                sqlCommand = new SqlCommand("SELECT name, object_id, schema_id, parent_object_id, type FROM [pubs].[sys].[key_constraints]", connection);
+                sqlCommand = new SqlCommand("SELECT name, object_id, schema_id, parent_object_id, type FROM [sys].[key_constraints]", connection);
 
                 dataReader = sqlCommand.ExecuteReader();
 

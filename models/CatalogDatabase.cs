@@ -7,22 +7,23 @@ using System.Data.SqlClient;
 
 namespace auditoria_grupo2_anomalias_integridad_referencial.models
 {
-    class TableDB
+    class CatalogDatabase
     {
         public string name;
-        public long object_id;
-        public int schema_id;
+        public int database_id;
+        public string create_date;
 
-        public TableDB(string name, long object_id, int schema_id)
+        public CatalogDatabase(string name, int database_id, string create_date)
         {
             this.name = name;
-            this.object_id = object_id;
-            this.schema_id = schema_id;
+            this.database_id = database_id;
+            this.create_date = create_date;
         }
 
-        public static List<TableDB> getAllTables()
+
+        public static List<CatalogDatabase> getAllCatalogDatabase()
         {
-            List<TableDB> tables = new List<TableDB>();
+            List<CatalogDatabase> databases = new List<CatalogDatabase>();
 
 
             SqlConnection connection = MyDB.getConnection();
@@ -33,7 +34,7 @@ namespace auditoria_grupo2_anomalias_integridad_referencial.models
             {
                 connection.Open();
 
-                sqlCommand = new SqlCommand("SELECT name, object_id, schema_id FROM [sys].[tables]", connection);
+                sqlCommand = new SqlCommand("SELECT name, database_id, create_date FROM sys.databases", connection);
 
                 dataReader = sqlCommand.ExecuteReader();
 
@@ -43,10 +44,10 @@ namespace auditoria_grupo2_anomalias_integridad_referencial.models
                     int index = 0;
 
                     string name = dataReader.GetValue(index++).ToString();
-                    long object_id = Int64.Parse(dataReader.GetValue(index++).ToString());
-                    int schema_id = Int32.Parse(dataReader.GetValue(index++).ToString());
+                    int database_id = Int32.Parse(dataReader.GetValue(index++).ToString());
+                    string create_date = dataReader.GetValue(index++).ToString();
 
-                    tables.Add(new TableDB(name, object_id, schema_id));
+                    databases.Add(new CatalogDatabase(name, database_id, create_date));
 
                 }
                 sqlCommand.Dispose();
@@ -62,9 +63,7 @@ namespace auditoria_grupo2_anomalias_integridad_referencial.models
                 connection.Close();
 
             }
-            return tables;
+            return databases;
         }
-
-
     }
 }

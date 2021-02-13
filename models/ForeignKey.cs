@@ -61,7 +61,7 @@ namespace auditoria_grupo2_anomalias_integridad_referencial.models
                 sqlCommand = new SqlCommand("SELECT [name], [object_id] ,[schema_id] ,[parent_object_id] ,[referenced_object_id] ," +
                     "[key_index_id] ,[is_disabled] ,[is_not_trusted] ,[delete_referential_action] ," +
                     "[delete_referential_action_desc] ,[update_referential_action] ,[update_referential_action_desc] ," +
-                    "[is_system_named] FROM [pubs].[sys].[foreign_keys]", connection);
+                    "[is_system_named] FROM [sys].[foreign_keys]", connection);
 
                 dataReader = sqlCommand.ExecuteReader();
 

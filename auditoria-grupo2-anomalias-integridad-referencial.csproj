@@ -46,6 +46,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Credentials.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Credentials.Designer.cs">
+      <DependentUpon>Credentials.cs</DependentUpon>
+    </Compile>
     <Compile Include="MainApp.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -53,6 +59,7 @@
       <DependentUpon>MainApp.cs</DependentUpon>
     </Compile>
     <Compile Include="models\AnomalyDetector.cs" />
+    <Compile Include="models\CatalogDatabase.cs" />
     <Compile Include="models\CheckConstraint.cs" />
     <Compile Include="models\ForeignKey.cs" />
     <Compile Include="models\MyDB.cs" />
@@ -62,6 +69,9 @@
     <Compile Include="models\Trigger.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Credentials.resx">
+      <DependentUpon>Credentials.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="MainApp.resx">
       <DependentUpon>MainApp.cs</DependentUpon>
     </EmbeddedResource>

@@ -10,8 +10,51 @@ namespace auditoria_grupo2_anomalias_integridad_referencial.models
 {
     class MyDB
     {
-        static string connetionString = @"Data Source=DESKTOP-U6QA500;Initial Catalog=pubs;User ID=g2;Password=g2";
+        public static string instance = "DESKTOP-U6QA500";
+        public static string catalog = "mibase";
+        public static string user = "g2";
+        public static string password = "g2";
+
+        public static void setInstanceParams(string instance, string user, string password)
+        {
+            MyDB.instance = instance;
+            MyDB.user = user;
+            MyDB.password = password;
+        }
+
+        
+
+
+        public static string connetionString = @"Data Source=DESKTOP-U6QA500;Initial Catalog=mibase;User ID=gx;Password=gx";
         static SqlConnection cnn = null;
+
+        public static bool setConnectionString(string catalog)
+        {
+            bool condition = false;
+            string tryConnetionString = "Data Source=" + MyDB.instance + ";Initial Catalog=" + catalog + ";User ID=" + MyDB.user + ";Password="+ MyDB.password;
+
+
+            SqlConnection tryConnection = new SqlConnection(tryConnetionString);
+            try
+            {
+                tryConnection.Open();
+                condition = true;
+
+            }
+            catch (Exception error)
+            {
+                Console.WriteLine(error);
+
+            }
+            finally
+            {
+                tryConnection.Close();
+            }
+            MyDB.connetionString = tryConnetionString;
+            MyDB.cnn = new SqlConnection(MyDB.connetionString);
+            return condition;
+
+        }
 
         public static SqlConnection getConnection()
         {

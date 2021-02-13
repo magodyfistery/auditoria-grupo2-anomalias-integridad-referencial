@@ -139,6 +139,8 @@ namespace auditoria_grupo2_anomalias_integridad_referencial.models
             List<ForeignKey> foreignKeys = ForeignKey.getAllForeignKeys();
             List<PrimaryKey> primaryKeys = PrimaryKey.getAllPrimaryKeys();
 
+            
+
             for (int i=0; i<foreignKeys.Count; i++)
             {
                 SqlCommand sqlCommand;

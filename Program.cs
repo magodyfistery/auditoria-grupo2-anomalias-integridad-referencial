@@ -17,8 +17,26 @@ namespace auditoria_grupo2_anomalias_integridad_referencial
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new MainApp());
-            
+            Application.Run(new Credentials());
+
+            /*
+            MyDB.setInstanceParams("DESKTOP-U6QA500", "g2", "g2");
+
+            if (MyDB.setConnectionString("mibase"))
+            {
+                Application.Run(new MainApp());
+
+                List<ForeignKey> foreignKeys = ForeignKey.getAllForeignKeys();
+                List<PrimaryKey> primaryKeys = PrimaryKey.getAllPrimaryKeys();
+                Console.WriteLine(foreignKeys.Count);
+                Console.WriteLine(primaryKeys.Count);
+        }
+            else
+            {
+                MessageBox.Show("No se pudo conectar. Credenciales inválidas");
+            }
+            */
+
 
         }
     }

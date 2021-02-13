@@ -55,7 +55,7 @@ namespace auditoria_grupo2_anomalias_integridad_referencial.models
 
                 sqlCommand = new SqlCommand("SELECT [name] ,[object_id] ,[parent_class] ,[parent_class_desc] ," +
                     "[parent_id] ,[type] ,[type_desc] ,[is_ms_shipped] ,[is_disabled] ,[is_not_for_replication] ," +
-                    "[is_instead_of_trigger] FROM [pubs].[sys].[triggers] WHERE parent_id='"+ parent_id+"'", connection);
+                    "[is_instead_of_trigger] FROM [sys].[triggers] WHERE parent_id='"+ parent_id+"'", connection);
 
                 dataReader = sqlCommand.ExecuteReader();
 
