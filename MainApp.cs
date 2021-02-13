@@ -23,21 +23,14 @@ namespace auditoria_grupo2_anomalias_integridad_referencial
 
         {
             this.father = father;
-
             this.father.Hide();
-
             InitializeComponent();
-
-
 
             databases = CatalogDatabase.getAllCatalogDatabase();
             foreach (CatalogDatabase database in databases)
             {
                 this.comboBox1.Items.Add(database.name);
             }
-
-
-
         }
 
 
@@ -204,11 +197,6 @@ namespace auditoria_grupo2_anomalias_integridad_referencial
             }
 
             Console.WriteLine(MyDB.connetionString);
-
-        }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
 
         }
 

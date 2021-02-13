@@ -41,5 +41,10 @@ namespace auditoria_grupo2_anomalias_integridad_referencial
             
 
         }
+
+        private void tableLayoutPanel1_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
     }
 }
